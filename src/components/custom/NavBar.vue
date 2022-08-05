@@ -5,7 +5,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center;width: 100% ">
           <b-nav-item href="/"><h2>LIVE CHAT</h2></b-nav-item>
           <div class="roomRoute" style=" display: flex">
-            <a  href="/room/1" >Group 1</a>
+            <router-link  to="/room/1" >Group 1</router-link>
             <a  href="/room/2" >Group 2</a>
             <a  href="/room/3" >Group 3</a>
           </div>
