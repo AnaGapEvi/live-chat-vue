@@ -6,7 +6,7 @@
           <b-nav-item href="/"><h2>LIVE CHAT</h2></b-nav-item>
           <div class="roomRoute" style=" display: flex">
             <router-link  to="/room/1" >Group 1</router-link>
-            <a  href="/room/2" >Group 2</a>
+            <router-link  to="/room/2" >Group 2</router-link>
             <a  href="/room/3" >Group 3</a>
           </div>
           <div>
