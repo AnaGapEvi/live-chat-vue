@@ -4,7 +4,6 @@
       <router-link :to="{ name: 'Room', params:{ id: room.id}}">{{room.name}}</router-link>
     </div>
   </div>
-
 </template>
 
 <script>

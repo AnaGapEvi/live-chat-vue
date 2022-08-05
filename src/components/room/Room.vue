@@ -72,9 +72,6 @@ export default {
       roomUser:[]
     }
   },
-  computed:{
-
-  },
   created() {
     this.scrollBottom()
     this.getmy()
@@ -91,9 +88,6 @@ export default {
         });
       })
     this.getUsers()
-  },
-  mounted() {
-
   },
   methods:{
     getmy(){

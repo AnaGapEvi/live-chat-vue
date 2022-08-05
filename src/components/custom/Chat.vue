@@ -55,18 +55,6 @@ export default {
   mounted() {
     this.getmy()
     this.fetchMessages()
-    // window.Echo.private('private-chat-room')
-    //   .listen('PrivateMessageEvent', (e) => {
-    //     this.messages.push({
-    //       message: e.message.message,
-    //       user: e.user,
-    //     })
-    //   })
-    //
-    // Echo.private('App.Models.User.1')
-    //   .notification((notification) => {
-    //     console.log(notification.message);
-    //   });
   },
 
   methods:{
