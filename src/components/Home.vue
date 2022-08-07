@@ -1,6 +1,6 @@
 <template>
   <div class="homepage">
-<!--    <a  href="/room/1" ><div class="room">Room 1</div></a>-->
+    <a  href="/room/1" ><div class="room">Room 1</div></a>
 <!--    <a  href="/room/2" ><div class="room">Room 2</div></a>-->
 <!--    <a  href="/room/3" ><div class="room">Room 3</div></a>-->
   </div>
