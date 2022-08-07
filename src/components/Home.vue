@@ -1,8 +1,8 @@
 <template>
   <div class="homepage">
-    <router-link  to="/room/1" ><div class="room">Room 1</div></router-link>
-    <router-link  to="/room/2" ><div class="room">Room 2</div></router-link>
-    <router-link to="/room/3" ><div class="room">Room 3</div></router-link>
+<!--    <router-link  to="/room/1" ><div class="room">Room 1</div></router-link>-->
+<!--    <router-link  to="/room/2" ><div class="room">Room 2</div></router-link>-->
+<!--    <router-link to="/room/3" ><div class="room">Room 3</div></router-link>-->
   </div>
 </template>
 
