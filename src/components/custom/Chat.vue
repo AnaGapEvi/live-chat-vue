@@ -3,7 +3,7 @@
     <h1>Chat</h1>
     <div class="scrollable cart-body" ref="hasScrolledToBottom">
       <template v-for="message in messages">
-        <div class="message message-receive" v-if="user.id != message.user.id">
+        <div class="message message-receive" v-if="user.id !== message.user.id">
           <p>
 <!--            <img :src="`https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=898&q=80`"  class="shadow-lg p-3 bg-white rounded" height="30px" width="30px" >-->
             <strong class="primary-font">

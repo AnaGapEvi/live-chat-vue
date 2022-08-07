@@ -121,6 +121,7 @@ export default {
         room_id: this.roomId,
         message:this.message
       };
+      this.message.push(roomMessage)
       axios.post('/room-messages', roomMessage).then(response =>{
         this.$nextTick(() => {
           this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);

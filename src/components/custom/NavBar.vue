@@ -5,7 +5,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center;width: 100% ">
           <b-nav-item href="/"><h2>LIVE CHAT</h2></b-nav-item>
           <div class="roomRoute" style=" display: flex">
-            <router-link   to="/room/1" > <button @click="window.location.reload()">Group 1</button></router-link>
+            <router-link   to="/room/1" > <button @click="reload()">Group 1</button></router-link>
             <router-link  to="/room/2" >Group 2</router-link>
             <a  href="/room/3" >Group 3</a>
           </div>
@@ -74,8 +74,12 @@ export default {
           }).catch(error => {
           reject(error)
         })
+
       })
     },
+    reload(){
+      window.location.reload()
+    }
   }
 }
 </script>
