@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home'
 import auth from '../components/auth/auth'
-import room from '../components/room/room'
 import Room from '../components/room/Room'
 
 
@@ -21,6 +20,5 @@ export default new Router({
       component: Room
     },
     ...auth,
-    ...room
   ]
 })
