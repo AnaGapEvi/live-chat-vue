@@ -4,7 +4,6 @@ import router from './router'
 
 Vue.config.productionTip = false
 require('./plugins')
-require('./components/room/room')
 require('./components/custom/custom')
 import Echo from "laravel-echo";
 
