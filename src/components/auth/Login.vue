@@ -58,6 +58,7 @@
                   variant="primary"
                   block
                   type="submit"
+                  @click="home()"
                 >
                   Sign in
                 </b-button>
@@ -101,6 +102,9 @@ export default {
     }
   },
   methods:{
+    home(){
+      this.$router.push({name: "HomeUser"})
+    },
     login_user() {
       return new Promise((resolve, reject) => {
         axios.post('/login', this.form)
