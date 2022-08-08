@@ -13,10 +13,20 @@ window.Echo = new Echo({
   broadcaster: 'pusher',
   key: "local",
   cluster:"mt1",
-  forceTLS: false,
+  forceTLS: true,
+  encrypted: true,
+  logToConsole: true,
   wsHost: window.location.hostname,
   wsPort: 6001,
 });
+// window.Echo = new Echo({
+//   broadcaster: 'pusher',
+//   key: "local",
+//   cluster:"mt1",
+//   forceTLS: false,
+//   wsHost: window.location.hostname,
+//   wsPort: 6001,
+// });
 
 Vue.config.productionTip = false
 
