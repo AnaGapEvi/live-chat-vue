@@ -53,7 +53,7 @@
                   />
                 </b-form-group>
               </validation>
-              <div class="mt-3" style="display: flex">
+              <div class="mt-3" style="display: flex; justify-content: space-between; width: 100%">
                 <b-button
                   variant="primary"
                   block
@@ -62,7 +62,7 @@
                   Sign in
                 </b-button>
                 <b-button
-                  variant="success"
+                  variant="primary"
                   block
                   type="submit"
                   to="/register"
