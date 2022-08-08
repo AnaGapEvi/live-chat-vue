@@ -16,7 +16,7 @@ window.Echo = new Echo({
   forceTLS: true,
   encrypted: true,
   logToConsole: true,
-  wsHost: window.location.hostname,
+  wsHost: 'https://intense-forest-89445.herokuapp.com/',
   wsPort: 6001,
 });
 // window.Echo = new Echo({
