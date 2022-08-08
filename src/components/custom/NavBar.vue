@@ -11,9 +11,9 @@
           </div>
           <div>
             <b-nav-item >
-              <div v-if="email === ''" class="d-flex justify-content-between align-items-center">
-                <b-nav-item :to="{ name: 'Register' }"> Sign up </b-nav-item>
-              </div>
+<!--              <div v-if="email === ''" class="d-flex justify-content-between align-items-center">-->
+<!--                <b-nav-item :to="{ name: 'Register' }"> Sign up </b-nav-item>-->
+<!--              </div>-->
               <div v-if="email !== ''" style="color: white"  right>
                 <router-link  to="/home-page/1"  style="margin-right: 15px">Messages</router-link>
                 <em style="color: white">{{email}}</em>

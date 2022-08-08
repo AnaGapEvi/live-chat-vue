@@ -61,8 +61,16 @@
                 >
                   Sign in
                 </b-button>
-
-
+              </div>
+              <div class="mt-3">
+                <b-button
+                  variant="success"
+                  block
+                  type="submit"
+                  to="/register"
+                >
+                  Sign up
+                </b-button>
               </div>
               <span style="color: #e59898" v-if="error!==''">{{error}}</span>
             </b-form>
@@ -72,7 +80,7 @@
               <router-link to="/forgot-password">Forgot your password?</router-link>
             </p>
             <p class="mt-5">
-              <router-link to="/register">Don't have an account?</router-link>
+<!--              <router-link >Don't have an account?</router-link>-->
             </p>
           </div>
         </b-col>
