@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '../components/Home'
 import auth from '../components/auth/auth'
 import Room from '../components/room/Room'
-
+import Login from "../components/auth/Login";
 
 Vue.use(Router)
 
@@ -12,8 +12,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'login',
+      component: Login
     },
     { path: '/room/:id',
       name:'Room',
