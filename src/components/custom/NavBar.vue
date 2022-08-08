@@ -5,15 +5,15 @@
         <div style="display: flex; justify-content: space-between; align-items: center;width: 100% ">
           <b-nav-item href="/"><h2>LIVE CHAT</h2></b-nav-item>
           <div class="roomRoute" style=" display: flex">
-            <a href="/room/1">Group 1</a>
-            <a href="/room/2">Group 2</a>
-            <a href="/room/3">Group 3</a>
+            <a href="/room/1">Room 1</a>
+            <a href="/room/2">Room 2</a>
+            <a href="/room/3">Room 3</a>
           </div>
           <div>
             <b-nav-item >
               <div v-if="email === ''" class="d-flex justify-content-between align-items-center">
                 <b-nav-item :to="{ name: 'Register' }"> Sign up </b-nav-item>
-                <b-nav-item :to="{ name: 'Login' }"> Sign in </b-nav-item>
+<!--                <b-nav-item :to="{ name: 'Login' }"> Sign in </b-nav-item>-->
               </div>
               <div v-if="email !== ''" style="color: white"  right>
                 <router-link  to="/home-page/1"  style="margin-right: 15px">Messages</router-link>
