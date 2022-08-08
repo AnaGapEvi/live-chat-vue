@@ -8,10 +8,6 @@
             <a href="/room/1">Group 1</a>
             <a href="/room/2">Group 2</a>
             <a href="/room/3">Group 3</a>
-
-<!--            <router-link  :to="{ name: 'Room', params:{ id: 1}}" >Group 1</router-link>-->
-<!--            <router-link  :to="{ name: 'Room', params:{ id: 2}}" >Group 2</router-link>-->
-<!--            <router-link  :to="{ name: 'Room', params:{ id: 3}}" >Group 3</router-link>-->
           </div>
           <div>
             <b-nav-item >
