@@ -103,7 +103,7 @@ export default {
   },
   methods:{
     home(){
-      this.$router.push({name: "HomeUser"})
+      this.$router.push({name: "Home"})
     },
     login_user() {
       return new Promise((resolve, reject) => {

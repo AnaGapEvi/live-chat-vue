@@ -11,6 +11,11 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/dashboard',
+      name: Home,
+      component: Home
+    },
+    {
       path: '/',
       name: 'login',
       component: Login
