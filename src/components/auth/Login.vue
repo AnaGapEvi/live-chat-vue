@@ -58,7 +58,6 @@
                   variant="primary"
                   block
                   type="submit"
-                  @click="home()"
                 >
                   Sign in
                 </b-button>
@@ -102,9 +101,6 @@ export default {
     }
   },
   methods:{
-    home(){
-      this.$router.push({name: "Home"})
-    },
     login_user() {
       return new Promise((resolve, reject) => {
         axios.post('/login', this.form)
@@ -112,7 +108,7 @@ export default {
             localStorage.setItem('access_token', result.data.token);
             resolve(true)
             console.log(result.data.token)
-            this.$router.push({name: "HomeUser"})
+            this.$router.push({path: "/dashboard"})
             window.location.reload()
           }).catch(error => {
             this.error=error.response.data.message

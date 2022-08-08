@@ -1,23 +1,46 @@
 <template>
   <div class="homepage">
-    <div>
+    <div style="width: 30%">
       <all-users/>
     </div>
-
-    <router-link  to="/room/1" ><div class="room">Room 1</div></router-link>
-    <router-link  to="/room/2" ><div class="room">Room 2</div></router-link>
-    <router-link  to="/room/3" ><div class="room">Room 3</div></router-link>
+    <div style="width: 50%">
+      <b-list-group style="width: 50%; text-align: right" >
+        <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
+          <router-link  style="text-decoration: none" :to="{ name: 'Room', params:{ id: 1}}"> <p>Room 1</p> </router-link>
+        </b-list-group-item>
+        <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
+          <router-link  style="text-decoration: none" :to="{ name: 'Room', params:{ id: 2}}"><p>Room 2</p> </router-link>
+        </b-list-group-item>
+        <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
+          <router-link  style="text-decoration: none" :to="{ name: 'Room', params:{ id: 3}}"><p>Room 3</p> </router-link>
+        </b-list-group-item>
+      </b-list-group>
+    </div>
   </div>
 </template>
 
 <script>
-
+import allUsers from "./custom/AllUsers";
 export default {
   name: 'Home',
-  components: {},
+  components: {allUsers},
 
   data () {
     return {
+      rooms:[],
+      error:''
+    }
+  },
+  created(){
+    this.room()
+  },
+  methods:{
+    room(){
+      this.axios.get('/rooms').then(response =>{
+        this.rooms = response.data
+      }).catch( e => {
+        return e
+      })
     }
   }
 }
@@ -29,20 +52,26 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-}
-.room {
-  margin-top: 300px;
-  margin-right: 50px;
-  background-color: rgba(100, 149, 237, 0.96);
-  width: 200px;
-  height: 200px;
-  border-radius: 30px;
   display: flex;
+  justify-content: space-around;
+
   align-items: center;
-  justify-content: center;
-  font-size: 30px;
+  padding-top: 50px
 }
+/*.room {*/
+/*  margin-top: 300px;*/
+/*  margin-right: 50px;*/
+/*  background-color: rgba(100, 149, 237, 0.96);*/
+/*  width: 200px;*/
+/*  height: 200px;*/
+/*  border-radius: 30px;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*  font-size: 30px;*/
+/*}*/
 a{
   text-decoration: none;
+
 }
 </style>

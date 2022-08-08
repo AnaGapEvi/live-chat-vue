@@ -1,10 +1,10 @@
 <template>
-  <div style="padding-top: 20px; width: 100%">
+  <div v-if="email !== ''" style="padding-top: 20px; width: 100%">
     <b-navbar size="lg" style="position: fixed;z-index: 1; width: 100%; color: white" type="dark" variant="dark">
       <b-navbar-nav style="width: 100%">
         <div style="display: flex; justify-content: space-between; align-items: center;width: 100% ">
-          <b-nav-item href="/"><h2>LIVE CHAT</h2></b-nav-item>
-          <div class="roomRoute" style=" display: flex">
+          <b-nav-item href="/dashboard"><h2>LIVE CHAT</h2></b-nav-item>
+          <div  class="roomRoute" style=" display: flex">
             <a href="/room/1">Room 1</a>
             <a href="/room/2">Room 2</a>
             <a href="/room/3">Room 3</a>
@@ -14,7 +14,7 @@
 <!--              <div v-if="email === ''" class="d-flex justify-content-between align-items-center">-->
 <!--                <b-nav-item :to="{ name: 'Register' }"> Sign up </b-nav-item>-->
 <!--              </div>-->
-              <div v-if="email !== ''" style="color: white"  right>
+              <div style="color: white"  right>
                 <router-link  to="/home-page/1"  style="margin-right: 15px">Messages</router-link>
                 <em style="color: white">{{email}}</em>
                 <a href="/" @click.prevent="logout()" >

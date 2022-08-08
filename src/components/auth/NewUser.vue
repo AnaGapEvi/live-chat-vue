@@ -202,7 +202,7 @@ export default {
               .then((response) => {
                 if(response){
 
-                  this.$router.push({name: "Login"})
+                  this.$router.push({path: "/"})
                 }
               }).catch( error => {
               console.log(this.form)

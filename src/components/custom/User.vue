@@ -7,7 +7,8 @@
       </div>
       <p style="padding-left: 5px">{{userItem.name}}</p>
       <p v-if="count>0" style="color: red; padding-left: 5px " >{{count}}</p>
-    </b-list-group-item>  </div>
+    </b-list-group-item>
+  </div>
 </template>
 
 <script>

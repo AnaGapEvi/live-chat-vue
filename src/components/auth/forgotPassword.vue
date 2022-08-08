@@ -81,7 +81,7 @@
           </validation-observer>
           <div class="d-flex justify-content-between">
             <p class="mt-5">
-              <router-link to="/login">Go to login page</router-link>
+              <router-link to="/">Go to login page</router-link>
             </p>
             <p class="mt-5">
               <router-link to="/register">Don't have an account?</router-link>
@@ -113,7 +113,7 @@ export default {
         axios.put('/forgot', this.user)
           .then((resp) => {
             if(resp){
-              this.$router.push({name: "Login"});
+              this.$router.push({path: "/"});
               console.log(resp.data)
             } else {
               console.log('you not have a account')

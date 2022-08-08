@@ -2,19 +2,22 @@
   <div class="room">
     <div style="width: 100%; ">
       <h1 >Room Users</h1>
-      <all-user/>
+      <div style="display: flex"  v-for="item in roomUser">
+        <div style="margin: 15px;padding: 5px; width: 30%; background-color: rgb(248,244,244) ">
+          <router-link  style="margin-left: 10px;text-decoration: none;display: flex; align-items: center; justify-content: space-around; color: black" :to="{ name: 'HomeUser', params:{ id: user.id}}">
+            <p v-if="item.user.name !== item.user.name-1">{{item.user.name}}  {{item.user.surname}}</p>
+<!--            <div>-->
+              <div v-if="item.user.status==='off'" style="width: 15px; height: 15px; border-radius: 50%; background-color: darkgrey "> </div>
+              <div v-else style="width: 15px; height: 15px; border-radius: 50%; background-color: #36b936 "> </div>
+<!--            </div>-->
+          </router-link>
+        </div>
+      </div>
     </div>
     <div style="width: 60%; padding-top: 30px;">
       <div class="chat cart" >
         <div class="roomUser">
-          <div style="display: flex"  v-for="item in roomUser">
-            <div style="margin-right: 15px">
-              <router-link  style="margin-left: 10px;text-decoration: none" :to="{ name: 'HomeUser', params:{ id: user.id}}">
-                <p v-if="item.user.name !== item.user.name-1">{{item.user.name}}</p>
-              </router-link>
-            </div>
 
-          </div>
         </div>
         <div class="scrollable cart-body" ref="hasScrolledToBottom" style="border-radius: 7px 7px 0 0;padding: 5px; background-color: rgba(199,197,197,0.77)">
           <template v-for="message in messages" style="height: 100%">
