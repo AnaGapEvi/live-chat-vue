@@ -6,8 +6,8 @@
           <b-nav-item href="/"><h2>LIVE CHAT</h2></b-nav-item>
           <div class="roomRoute" style=" display: flex">
             <router-link  :to="{ name: 'Room', params:{ id: 1}}" >Group 1</router-link>
-            <router-link  :to="{ name: 'Room', params:{ id: 2}}" >Group 1</router-link>
-            <router-link  :to="{ name: 'Room', params:{ id: 3}}" >Group 1</router-link>
+            <router-link  :to="{ name: 'Room', params:{ id: 2}}" >Group 2</router-link>
+            <router-link  :to="{ name: 'Room', params:{ id: 3}}" >Group 3</router-link>
           </div>
           <div>
             <b-nav-item >
