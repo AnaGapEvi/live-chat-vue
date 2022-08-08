@@ -157,7 +157,7 @@
           <b-button type="submit" variant="primary">Sign up</b-button>
         </b-form>
       </validation-observer>
-      <router-link to="/login" style="margin-top: 15px">Go to login page</router-link>
+      <router-link to="/" style="margin-top: 15px">Go to login page</router-link>
 
     </div>
 

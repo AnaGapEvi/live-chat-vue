@@ -17,7 +17,7 @@
               <div v-if="email !== ''" style="color: white"  right>
                 <router-link  to="/home-page/1"  style="margin-right: 15px">Messages</router-link>
                 <em style="color: white">{{email}}</em>
-                <a href="/login" @click.prevent="logout()" >
+                <a href="/" @click.prevent="logout()" >
                   Sign out
                 </a>
               </div>

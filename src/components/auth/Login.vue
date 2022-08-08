@@ -53,7 +53,7 @@
                   />
                 </b-form-group>
               </validation>
-              <div class="mt-3">
+              <div class="mt-3" style="display: flex">
                 <b-button
                   variant="primary"
                   block
@@ -61,8 +61,6 @@
                 >
                   Sign in
                 </b-button>
-              </div>
-              <div class="mt-3">
                 <b-button
                   variant="success"
                   block
