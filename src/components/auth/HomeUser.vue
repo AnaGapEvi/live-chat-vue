@@ -87,7 +87,6 @@ export default {
   },
   mounted() {
     this.getMy()
-    // this.getUser(this.id)
     window.Echo.channel('chat-channel')
       .listen('SendMessage', (e)=>{
         this.messages.push({
@@ -105,7 +104,6 @@ export default {
       axios.get('/messages/' + this.receiverId).then(response =>{
         this.messages = response.data
         this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
-
       });
 
     },
@@ -124,18 +122,7 @@ export default {
       });
 
     },
-    // getUser(id) {
-    //   console.log(id)
-    //   axios.get(`/user/${id}`)
-    //     .then(response => {
-    //       console.log(response)
-    //       this.user = response.data
-    //       // console.log(response.data)
-    //     }).catch(error => {
-    //     console.log(error)
-    //   })
-    // },
-    getMy(){
+      getMy(){
       return new Promise((resolve, reject) => {
         axios.get('/me')
           .then(result => {
@@ -147,12 +134,6 @@ export default {
         })
       })
     },
-    // scrollBottom(){
-    //   if(this.messages.length > 1){
-    //     let el = this.hasScrolledBottom.value;
-    //     el.scrollTop = el.scrollHeight;
-    //   }
-    // }
   }
 }
 </script>

@@ -18,7 +18,7 @@ window.Echo = new Echo({
   logToConsole: true,
   // wsHost: window.location.hostname,
 
-  wsHost: `"https://intense-forest-89445.herokuapp.com/" + 6001`,
+  wsHost: "https://intense-forest-89445.herokuapp.com:6001" ,
   // wsPort: 6001,
   // wssPort: 6001,
   enabledTransports: ['ws', 'wss']

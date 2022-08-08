@@ -27,7 +27,6 @@ export default {
   },
   methods:{
     messageStatus(id){
-      ///////////////////////////////////////////////////////
       axios.get(`/status/user-message/${id}`)
         .then(response => {
         this.count = response.data
