@@ -3,19 +3,21 @@
     <div style="width: 30%">
       <all-users/>
     </div>
-    <div style="width: 50%">
-      <b-list-group style="width: 50%; text-align: right" >
-        <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
-          <router-link  style="text-decoration: none" :to="{ name: 'Room', params:{ id: 1}}"> <p>Room 1</p> </router-link>
-        </b-list-group-item>
-        <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
-          <router-link  style="text-decoration: none" :to="{ name: 'Room', params:{ id: 2}}"><p>Room 2</p> </router-link>
-        </b-list-group-item>
-        <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
-          <router-link  style="text-decoration: none" :to="{ name: 'Room', params:{ id: 3}}"><p>Room 3</p> </router-link>
-        </b-list-group-item>
-      </b-list-group>
-    </div>
+
+<!--    <div style="width: 50%" v-for="room in rooms" :key="room.id">-->
+<!--      <b-list-group style="width: 50%;   text-align: right" class="d-flex  align-items-center">-->
+<!--        <b-list-group-item  style="margin-bottom: 15px;display: flex; flex-wrap: wrap; box-shadow: 6px 4px #00A4BD">-->
+<!--          <router-link :to="{ name: 'Room', params:{ id: room.id}}">{{room.name}}</router-link>-->
+<!--        </b-list-group-item>-->
+<!--      </b-list-group>-->
+<!--    </div>-->
+      <div v-for="room in rooms" :key="room.id" >
+        <b-list-group>
+          <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
+            <router-link :to="{ name: 'Room', params:{ id: room.id}}" >{{room.name}}</router-link>
+          </b-list-group-item>
+        </b-list-group>
+      </div>
   </div>
 </template>
 
@@ -38,6 +40,7 @@ export default {
     room(){
       this.axios.get('/rooms').then(response =>{
         this.rooms = response.data
+        console.log(this.rooms)
       }).catch( e => {
         return e
       })
