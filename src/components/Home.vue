@@ -3,21 +3,27 @@
     <div style="width: 30%">
       <all-users/>
     </div>
-
-<!--    <div style="width: 50%" v-for="room in rooms" :key="room.id">-->
-<!--      <b-list-group style="width: 50%;   text-align: right" class="d-flex  align-items-center">-->
-<!--        <b-list-group-item  style="margin-bottom: 15px;display: flex; flex-wrap: wrap; box-shadow: 6px 4px #00A4BD">-->
-<!--          <router-link :to="{ name: 'Room', params:{ id: room.id}}">{{room.name}}</router-link>-->
-<!--        </b-list-group-item>-->
-<!--      </b-list-group>-->
-<!--    </div>-->
-      <div v-for="room in rooms" :key="room.id" >
-        <b-list-group>
+      <b-list-group >
           <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
-            <router-link :to="{ name: 'Room', params:{ id: room.id}}" >{{room.name}}</router-link>
+<!--            <router-link :to="{ name: 'Room', params:{ id: room.id}}" >{{room.name}}</router-link>-->
+            <router-link to="/room/1" >Room1</router-link>
+            <div v-if="room1==1"  style="width: 15px; height: 15px; border-radius: 50%; background-color: red "> </div>
           </b-list-group-item>
         </b-list-group>
-      </div>
+    <b-list-group >
+      <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
+        <!--            <router-link :to="{ name: 'Room', params:{ id: room.id}}" >{{room.name}}</router-link>-->
+        <router-link to="/room/2" >Room2</router-link>
+        <div v-if="room2==2"  style="width: 15px; height: 15px; border-radius: 50%; background-color: red "> </div>
+      </b-list-group-item>
+    </b-list-group>
+    <b-list-group >
+      <b-list-group-item class="d-flex  align-items-center" style="margin-bottom: 15px; box-shadow: 6px 4px #00A4BD">
+        <router-link to="/room/3" >Room3</router-link>
+        <div v-if="room3==3" style="width: 15px; height: 15px; border-radius: 50%; background-color: red "> </div>
+      </b-list-group-item>
+    </b-list-group>
+
   </div>
 </template>
 
@@ -30,11 +36,40 @@ export default {
   data () {
     return {
       rooms:[],
-      error:''
+      error:'',
+      room1:'',
+      room2:'',
+      room3:'',
+      event:0,
+
     }
   },
   created(){
     this.room()
+    window.Echo.channel('chat')
+      .listen('NewTrade', (e)=>{
+        if(e.room==1){
+          this.event =e.room
+          localStorage.setItem('newMessageRoom1', this.event)
+          this.room1=localStorage.getItem('newMessageRoom1')
+        }else if(e.room==2){
+          this.event =e.room
+          localStorage.setItem('newMessageRoom2', this.event)
+          this.room2=localStorage.getItem('newMessageRoom2')
+        }else if(e.room==3){
+          this.event =e.room
+          localStorage.setItem('newMessageRoom3', this.event)
+          this.room3 = localStorage.getItem('newMessageRoom3')
+        }else{
+          console.log(e.room)
+        }
+      })
+  },
+  mounted() {
+    this.room1=localStorage.getItem('newMessageRoom2')
+    this.room3 = localStorage.getItem('newMessageRoom3')
+    this.room2=localStorage.getItem('newMessageRoom2')
+
   },
   methods:{
     room(){
@@ -45,6 +80,7 @@ export default {
         return e
       })
     }
+
   }
 }
 </script>

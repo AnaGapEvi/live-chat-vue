@@ -1,10 +1,11 @@
 <template>
   <div class="room">
     <div style="width: 100%; ">
-      <h1 >Room Users</h1>
+      <h1 v-if="roomUser.length>1" >Room Users</h1>
+      <h1 v-else>This room has no users</h1>
       <div style="display: flex"  v-for="item in roomUser">
         <div style="margin: 15px;padding: 5px; width: 30%; background-color: rgb(248,244,244) ">
-          <router-link  style="margin-left: 10px;text-decoration: none;display: flex; align-items: center; justify-content: space-around; color: black" :to="{ name: 'HomeUser', params:{ id: user.id}}">
+          <router-link  style="margin-left: 10px;text-decoration: none;display: flex; align-items: center; justify-content: space-around; color: black" :to="{ name: 'HomeUser', params:{ id: item.id}}">
             <p v-if="item.user.name !== item.user.name-1">{{item.user.name}}  {{item.user.surname}}</p>
 <!--            <div>-->
               <div v-if="item.user.status==='off'" style="width: 15px; height: 15px; border-radius: 50%; background-color: darkgrey "> </div>
@@ -72,7 +73,17 @@ export default {
       user:{},
       roomId: this.$route.params.id,
       users:{},
-      roomUser:[]
+      roomUser:[],
+      name:''
+    }
+  },
+  mounted() {
+    if(this.$route.params.id==1){
+      localStorage.removeItem('newMessageRoom1')
+    }else if(this.$route.params.id==2) {
+      localStorage.removeItem('newMessageRoom2')
+    }else{
+      localStorage.removeItem('newMessageRoom3')
     }
   },
   created() {
@@ -82,7 +93,7 @@ export default {
     window.Echo.channel('chat-room-channel')
       .listen('PrivateMessageEvent', (e) => {
         this.messages.push({
-          // room_id: this.roomId,
+          room_id: this.roomId,
           user: e.user,
           message: e.message.message,
         })
@@ -90,19 +101,31 @@ export default {
           this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
         });
       })
-    this.getUsers()
+    // this.getUsers()
   },
+
   methods:{
     getmy(){
       axios.get('/me').then(response =>{
         this.user = response.data.user
       });
     },
+
     fetchMessages (){
       axios.get('/room-messages/' + this.roomId).then(response =>{
-        console.log(response.data)
+        // let countRes = response.data.length
+        // let l = localStorage.getItem('mesLength')
+        // let c = countRes-l
+        // console.log(c)
+        // console.log(countRes)
         this.messages = response.data
+        // let countMes = this.messages.length
+        // localStorage.setItem('mesLength', countMes)
+        // console.log(countMes)
 
+        this.$nextTick(() => {
+          this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
+        });
           for(let i=0; i<this.messages.length; i++ ){
             let isHasNotEqual = true
             for(let j=0; j<this.roomUser.length; j++ ){
@@ -112,10 +135,8 @@ export default {
             }
             if (isHasNotEqual){
               this.roomUser.push(this.messages[i])
-              console.log(this.roomUser)
             }
           }
-        console.log(this.messages)
       });
     },
     addMessage(){
@@ -132,9 +153,9 @@ export default {
       });
       this.message =''
     },
-    getUsers (){
-      console.log(this.messages)
-    },
+    // getUsers (){
+    //   console.log(this.messages)
+    // },
     scrollBottom() {
       if (this.messages.length > 1){
           this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);

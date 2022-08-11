@@ -6,7 +6,7 @@
         <div v-else style="width: 15px; height: 15px; border-radius: 50%; background-color: #36b936 "> </div>
       </div>
       <p style="padding-left: 5px">{{userItem.name}}</p>
-      <p v-if="count>0" style="color: red; padding-left: 5px " >{{count}}</p>
+      <p v-if="count>0" style="color: red; padding-left: 5px; margin-left: 5px " >{{count}}</p>
     </b-list-group-item>
   </div>
 </template>
@@ -25,6 +25,12 @@ export default {
   },
   mounted() {
     this.messageStatus(this.userItem.id)
+
+    // window.Echo.channel('count-message')
+    //   .listen('CountMessage', (e)=>{
+    //     this.count =e.count
+    //
+    //   })
   },
   methods:{
     messageStatus(id){

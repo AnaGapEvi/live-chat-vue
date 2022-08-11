@@ -7,13 +7,16 @@
       <div style="width: 30%; padding: 10px; border-radius: 10px">
         <div class="d-flex" style="background-color: #435f7a; padding: 5px; border-radius: 7px 7px 0  0">
           <b-icon icon="three-dots" animation="cylon" font-scale="2"></b-icon>
+          <p v-if="messages[0].user.name !== data.name">{{messages[0].user.name}}</p>
+          <p v-if="messages[1].user.name !== data.name">{{messages[1].user.name}}</p>
+
         </div>
 
         <div class="scrollable cart-body chat" ref="hasScrolledToBottom">
         <div v-for="message in messages" >
           <div class="message message-receive" v-if="data.id !== message.user.id">
             <p>
-              <strong class="primary-font" v-model="message.user.name">
+              <strong class="primary-font">
                 {{message.user.name}} :
               </strong>
               {{message.message}}
@@ -22,7 +25,7 @@
           </div>
           <div class="message message-send" v-else>
             <p>
-              <strong class="primary-font">
+              <strong class="primary-font" >
                 {{message.user.name}} :
               </strong>
               {{message.message}}
@@ -64,11 +67,13 @@ export default {
       messages:[],
       message:'',
       data: {},
+      container:'',
       hasScrolledBottom:0,
       receiver:this.$route.params.id,
       name:'',
       user:{},
-      id:this.$route.params.id
+      id:this.$route.params.id,
+
     }
   },
   watch: {
@@ -86,6 +91,8 @@ export default {
     this.fetchMessages()
   },
   mounted() {
+    // this.hasScrolledBottom = this.$refs.hasScrolledToBottom;
+    // this.hasScrolledBottom.scrollTop = this.hasScrolledBottom.scrollHeight;
     this.getMy()
     window.Echo.channel('chat-channel')
       .listen('SendMessage', (e)=>{
@@ -100,12 +107,16 @@ export default {
       })
   },
   methods:{
+    nameUser(name){
+      this.name = name
+    },
     fetchMessages (){
       axios.get('/messages/' + this.receiverId).then(response =>{
         this.messages = response.data
-        this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
+        this.$nextTick(() => {
+          this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
+        });
       });
-
     },
     addMessage(){
       console.log(this.receiverId)
