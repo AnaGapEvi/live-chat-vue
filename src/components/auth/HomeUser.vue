@@ -7,9 +7,9 @@
       <div style="width: 30%; padding: 10px; border-radius: 10px">
         <div class="d-flex" style="background-color: #435f7a; padding: 5px; border-radius: 7px 7px 0  0">
           <b-icon icon="three-dots" animation="cylon" font-scale="2"></b-icon>
-          <p v-if="messages[0].user.name !== data.name">{{messages[0].user.name}}</p>
-          <p v-if="messages[1].user.name !== data.name">{{messages[1].user.name}}</p>
 
+<!--          <p v-if="messages[0].user.name !== data.name">{{messages[0].user.name}}</p>-->
+<!--          <p v-if="messages[1].user.name !== data.name">{{messages[1].user.name}}</p>-->
         </div>
 
         <div class="scrollable cart-body chat" ref="hasScrolledToBottom">

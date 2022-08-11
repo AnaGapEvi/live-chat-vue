@@ -5,7 +5,7 @@
       <h1 v-else>This room has no users</h1>
       <div style="display: flex"  v-for="item in roomUser">
         <div style="margin: 15px;padding: 5px; width: 30%; background-color: rgb(248,244,244) ">
-          <router-link  style="margin-left: 10px;text-decoration: none;display: flex; align-items: center; justify-content: space-around; color: black" :to="{ name: 'HomeUser', params:{ id: item.id}}">
+          <router-link  style="margin-left: 10px;text-decoration: none;display: flex; align-items: center; justify-content: space-around; color: black" :to="{ name: 'HomeUser', params:{ id: item.user.id}}">
             <p v-if="item.user.name !== item.user.name-1">{{item.user.name}}  {{item.user.surname}}</p>
 <!--            <div>-->
               <div v-if="item.user.status==='off'" style="width: 15px; height: 15px; border-radius: 50%; background-color: darkgrey "> </div>

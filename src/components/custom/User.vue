@@ -26,11 +26,12 @@ export default {
   mounted() {
     this.messageStatus(this.userItem.id)
 
-    // window.Echo.channel('count-message')
-    //   .listen('CountMessage', (e)=>{
-    //     this.count =e.count
-    //
-    //   })
+    window.Echo.channel('count-message')
+      .listen('CountMessage', (e)=>{
+        // alert('new message in room ' + e.room)
+        this.event = e.room
+
+      })
   },
   methods:{
     messageStatus(id){
