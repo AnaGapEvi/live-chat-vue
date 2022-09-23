@@ -201,11 +201,9 @@ export default {
               axios.post('/register', this.form)
               .then((response) => {
                 if(response){
-
                   this.$router.push({path: "/"})
                 }
               }).catch( error => {
-              console.log(this.form)
               this.error=error.response.data.message;
               });
           } else {

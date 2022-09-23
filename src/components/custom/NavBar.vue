@@ -3,25 +3,22 @@
     <b-navbar size="lg" style="position: fixed;z-index: 1; width: 100%; color: white" type="dark" variant="dark">
       <b-navbar-nav style="width: 100%">
         <div style="display: flex; justify-content: space-between; align-items: center;width: 100% ">
-          <b-nav-item href="/dashboard"><h2>LIVE CHAT</h2></b-nav-item>
-          <div  class="roomRoute" style=" display: flex">
-            <a href="/room/1">Room 1</a>
-            <a href="/room/2">Room 2</a>
-            <a href="/room/3">Room 3</a>
+          <b-nav-item style="margin-top: 10px" href="/dashboard"><h2>LIVE CHAT</h2></b-nav-item>
+          <div  class="roomRoute" style=" display: flex; justify-content: space-evenly" v-for="room in rooms">
+              <router-link :to="{path: '/room/'+room.id, params:{id: room.id}}">{{room.name}}</router-link>
           </div>
           <div>
             <b-nav-item >
               <div style="color: white"  right>
                 <router-link  to="/home-page/1"  style="margin-right: 15px">Messages</router-link>
                 <em style="color: white">{{email}}</em>
-                <a href="/" @click.prevent="logout()" >
+                <button @click="logout()" class="out-btn" >
                   Sign out
-                </a>
+                </button>
               </div>
             </b-nav-item>
           </div>
         </div>
-
       </b-navbar-nav>
     </b-navbar>
   </div>
@@ -33,11 +30,12 @@ export default {
   data(){
     return{
       email:'',
+      rooms:[]
     }
   },
   mounted() {
     if (localStorage.getItem('access_token')){
-      this.getMy()
+      this.getAuth()
     }
   },
   created(){
@@ -55,13 +53,13 @@ export default {
     logout(){
       axios.get('/logout').then(result => {
         localStorage.removeItem('access_token');
-        this.$router.push({name: "Home"});
-        window.location.reload()
+        this.email=''
+        this.$router.push({path: "/"});
       }).catch(error => {
         return error
       })
     },
-    getMy(){
+    getAuth(){
       return new Promise((resolve, reject) => {
         axios.get('/me')
           .then(result => {
@@ -73,9 +71,6 @@ export default {
 
       })
     },
-    // reload(){
-    //   window.location.reload()
-    // }
   }
 }
 </script>
@@ -89,5 +84,11 @@ a{
 a:active{
   color: #e59898;
 }
-
+.out-btn{
+  background: none;
+  padding: 5px;
+  width: 150px;
+  border: none;
+  color: white;
+}
 </style>

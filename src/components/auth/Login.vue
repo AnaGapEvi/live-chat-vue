@@ -78,7 +78,6 @@
               <router-link to="/forgot-password">Forgot your password?</router-link>
             </p>
             <p class="mt-5">
-<!--              <router-link >Don't have an account?</router-link>-->
             </p>
           </div>
         </b-col>
@@ -100,6 +99,11 @@ export default {
       error:''
     }
   },
+  mounted() {
+    if(localStorage.getItem('access_token')){
+      localStorage.removeItem('access_token');
+    }
+  },
   methods:{
     login_user() {
       return new Promise((resolve, reject) => {
@@ -107,7 +111,6 @@ export default {
           .then(result => {
             localStorage.setItem('access_token', result.data.token);
             resolve(true)
-            console.log(result.data.token)
             this.$router.push({path: "/dashboard"})
             window.location.reload()
           }).catch(error => {

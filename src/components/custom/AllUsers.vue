@@ -1,7 +1,7 @@
 <template>
   <div class="all-user" >
     <b-list-group style="width: 50%;" v-for="user in users" :key="user.id">
-        <router-link  style="text-decoration: none" :to="{ name: 'HomeUser', params:{ id: user.id}}"><one-user :user="user"/></router-link>
+        <router-link  style="text-decoration: none" :to="{name: 'HomeUser', params:{ id: user.id}}"><one-user :user="user"/></router-link>
     </b-list-group>
   </div>
 </template>

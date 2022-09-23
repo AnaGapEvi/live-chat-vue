@@ -73,8 +73,6 @@
               >
                 Sign in
               </b-button>
-
-
             </div>
             <span style="color: #e59898" v-if="error!==''">{{error}}</span>
           </b-form>
@@ -114,14 +112,12 @@ export default {
           .then((resp) => {
             if(resp){
               this.$router.push({path: "/"});
-              console.log(resp.data)
             } else {
-              console.log('you not have a account')
+              this.error = 'you  have not a account'
             }
           })
           .catch((e) => {
-            this.error = 'user does not exist'
-            console.log(e)
+            this.error = e.response.data.message
           })
       } else{
         this.error='password does not match'

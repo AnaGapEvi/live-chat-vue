@@ -75,7 +75,6 @@ export default {
     room(){
       this.axios.get('/rooms').then(response =>{
         this.rooms = response.data
-        console.log(this.rooms)
       }).catch( e => {
         return e
       })
@@ -97,18 +96,6 @@ export default {
   align-items: center;
   padding-top: 50px
 }
-/*.room {*/
-/*  margin-top: 300px;*/
-/*  margin-right: 50px;*/
-/*  background-color: rgba(100, 149, 237, 0.96);*/
-/*  width: 200px;*/
-/*  height: 200px;*/
-/*  border-radius: 30px;*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  font-size: 30px;*/
-/*}*/
 a{
   text-decoration: none;
 

@@ -15,7 +15,7 @@
 import axios from "axios";
 
 export default {
-  name: "User",
+  name: 'User',
   props: ['user'],
   data(){
     return{
@@ -28,7 +28,6 @@ export default {
 
     window.Echo.channel('count-message')
       .listen('CountMessage', (e)=>{
-        // alert('new message in room ' + e.room)
         this.event = e.room
 
       })
@@ -39,8 +38,8 @@ export default {
         .then(response => {
         this.count = response.data
         return response
-      }).then(e => {
-        console.log(error)
+      }).then( error => {
+        return error
       })
     },
     readMessage(id){
@@ -48,8 +47,8 @@ export default {
         .then(response =>{
           this.count=0
         return response
-      }).catch(e=>{
-        console.log(e)
+      }).catch( error =>{
+        return error
       })
     }
   }
@@ -58,7 +57,6 @@ export default {
 
 <style scoped>
 .user{
-  /*border-style: inset;*/
   width: 100%;
   justify-content: space-between;
   margin-top: 15px;

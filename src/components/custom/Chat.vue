@@ -5,7 +5,6 @@
       <template v-for="message in messages">
         <div class="message message-receive" v-if="user.id !== message.user.id">
           <p>
-<!--            <img :src="`https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=898&q=80`"  class="shadow-lg p-3 bg-white rounded" height="30px" width="30px" >-->
             <strong class="primary-font">
               {{message.user.name}} :
             </strong>
@@ -25,11 +24,8 @@
     <div class="chat-form input-group">
       <input id="btn-input" type="text" name="message" class="form-control input-sm message-" placeholder="Type your message here..." v-model="message" @keyup.enter="addMessage">
       <span class="input-group-btn">
-                <button class="btn btn-primary" id="btn-chat" @click="addMessage">
-                    Send
-                </button>
-
-            </span>
+                <button class="btn btn-primary" id="btn-chat" @click="addMessage"> Send </button>
+       </span>
     </div>
   </div>
 </template>
@@ -53,20 +49,20 @@ export default {
     this.scrollBottom()
   },
   mounted() {
-    this.getmy()
+    this.getAuth()
     this.fetchMessages()
   },
 
   methods:{
-    getmy(){
+    getAuth(){
       axios.get('/me').then(response =>{
         this.user = response.data.user
       });
     },
     fetchMessages (){
       axios.get('/room-messages/' + this.roomId).then(response =>{
-        console.log(response.data)
         this.messages = response.data
+
       });
     },
     addMessage(){
@@ -75,17 +71,17 @@ export default {
         user:this.user,
         message:this.message
       };
-      console.log(roomMessage)
       this.messages.push(...roomMessage);
       axios.post('/room-messages', roomMessage).then(response =>{
-        console.log(response.data)
+        if(response) {
+          this.scrollBottom()
+          this.message = ''
+        }
       });
-      this.message =''
     },
-    scrollBottom(){
-      if(this.messages.length > 1){
-        let el = this.hasScrolledBottom.value;
-        el.scrollTop = el.scrollHeight;
+    scrollBottom() {
+      if (this.messages.length > 1){
+        this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
       }
     }
   }
@@ -98,7 +94,6 @@ export default {
   margin-top: 5px;
   display: inline-block;
   width: auto;
-  /*margin: 0px;*/
 }
 .message-send p{
   background: #e0e3e6;
@@ -120,14 +115,7 @@ export default {
   overflow-y: scroll;
   height: calc(100vh - 25vh);
 }
-.message-input{
-  border: none;
-  border-radius: 0px;
-  background: #f2f2f2;
-}
-.container{
-  width: 100%;
-}
+
 .chat{
   background-image: url("https://thumbs.dreamstime.com/b/chat-seamless-pattern-vector-minimal-texture-background-made-thin-line-bubbles-66029898.jpg");
   min-height: 100vh;

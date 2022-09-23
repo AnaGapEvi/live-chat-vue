@@ -6,11 +6,9 @@
       <div style="display: flex"  v-for="item in roomUser">
         <div style="margin: 15px;padding: 5px; width: 30%; background-color: rgb(248,244,244) ">
           <router-link  style="margin-left: 10px;text-decoration: none;display: flex; align-items: center; justify-content: space-around; color: black" :to="{ name: 'HomeUser', params:{ id: item.user.id}}">
-            <p v-if="item.user.name !== item.user.name-1">{{item.user.name}}  {{item.user.surname}}</p>
-<!--            <div>-->
+            <p v-if="item.user.name !== item.user.name-1">{{item.user.name}} {{item.user.surname}}</p>
               <div v-if="item.user.status==='off'" style="width: 15px; height: 15px; border-radius: 50%; background-color: darkgrey "> </div>
               <div v-else style="width: 15px; height: 15px; border-radius: 50%; background-color: #36b936 "> </div>
-<!--            </div>-->
           </router-link>
         </div>
       </div>
@@ -43,11 +41,6 @@
           </template>
         </div>
         <div class="chat-form input-group">
-          <span class="input-group-btn">
-                <button class="btn btn-primary" id="btn-chat" @click="addMessage">
-                   +
-                </button>
-            </span>
           <input id="btn-input" type="text" name="message" class="form-control input-sm message-" placeholder="Type your message here..." v-model="message" @keyup.enter="addMessage">
           <span class="input-group-btn">
                 <button class="btn btn-primary" id="btn-chat" @click="addMessage">
@@ -62,69 +55,53 @@
 </template>
 <script>
 import axios from "axios";
-import Echo from "laravel-echo";
-
 export default {
   data(){
     return{
       messages:[],
-      hasScrolledBottom:'',
       message:'',
       user:{},
-      roomId: this.$route.params.id,
-      users:{},
       roomUser:[],
-      name:''
     }
   },
-  mounted() {
-    if(this.$route.params.id==1){
-      localStorage.removeItem('newMessageRoom1')
-    }else if(this.$route.params.id==2) {
-      localStorage.removeItem('newMessageRoom2')
-    }else{
-      localStorage.removeItem('newMessageRoom3')
+  watch: {
+    receiverId(newValue, old){
+      this.fetchMessages()
     }
+  },
+  computed: {
+    receiverId(){
+      return this.$route.params.id
+    },
   },
   created() {
-    this.scrollBottom()
-    this.getmy()
     this.fetchMessages()
+    this.scrollBottom()
+    this.getAuth()
     window.Echo.channel('chat-room-channel')
       .listen('PrivateMessageEvent', (e) => {
         this.messages.push({
-          room_id: this.roomId,
+          room_id: this.receiverId,
           user: e.user,
           message: e.message.message,
         })
         this.$nextTick(() => {
-          this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
+          this.scrollBottom()
         });
       })
-    // this.getUsers()
   },
 
   methods:{
-    getmy(){
+    getAuth(){
       axios.get('/me').then(response =>{
         this.user = response.data.user
       });
     },
-
     fetchMessages (){
-      axios.get('/room-messages/' + this.roomId).then(response =>{
-        // let countRes = response.data.length
-        // let l = localStorage.getItem('mesLength')
-        // let c = countRes-l
-        // console.log(c)
-        // console.log(countRes)
+      axios.get('/room-messages/' + this.receiverId).then(response =>{
         this.messages = response.data
-        // let countMes = this.messages.length
-        // localStorage.setItem('mesLength', countMes)
-        // console.log(countMes)
-
         this.$nextTick(() => {
-          this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
+          this.scrollBottom()
         });
           for(let i=0; i<this.messages.length; i++ ){
             let isHasNotEqual = true
@@ -142,20 +119,17 @@ export default {
     addMessage(){
       let roomMessage = {
         user:this.user,
-        room_id: this.roomId,
+        room_id: this.receiverId,
         message:this.message
       };
-      // this.message.push(roomMessage)
       axios.post('/room-messages', roomMessage).then(response =>{
         this.$nextTick(() => {
-          this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
+          this.scrollBottom()
+          this.message =''
         });
       });
-      this.message =''
+
     },
-    // getUsers (){
-    //   console.log(this.messages)
-    // },
     scrollBottom() {
       if (this.messages.length > 1){
           this.$refs.hasScrolledToBottom.scrollTo(0, this.$refs.hasScrolledToBottom.scrollHeight);
@@ -180,7 +154,7 @@ export default {
   margin-top: 5px;
   display: inline-block;
   width: auto;
-  /*margin: 0px;*/
+
 }
 .message-send p{
   background: #e0e3e6;
@@ -209,14 +183,7 @@ export default {
   overflow-y: scroll;
   height: calc(100vh - 25vh);
 }
-.message-input{
-  border: none;
-  border-radius: 0px;
-  background: #f2f2f2;
-}
-.container{
-  width: 100%;
-}
+
 .hide{
   display: none;
   font-size: 10px;
